@@ -1,0 +1,16 @@
+hostname: rancher
+
+rancher:
+  network:
+    interfaces:
+      eth*:
+       dhcp: false
+      eth0:
+       address: 10.0.10.5/24
+       gateway: 10.0.10.1
+    dns:
+     nameservers:
+      - 10.0.10.1
+
+#ssh_authorized_keys:
+#  - ssh-rsa
