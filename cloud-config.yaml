@@ -1,16 +1,24 @@
-hostname: rancher
+#cloud-config
 
+hostname: rancher
 rancher:
+  console: ubuntu
   network:
     interfaces:
-      eth*:
-       dhcp: false
       eth0:
-       address: 10.0.10.5/24
-       gateway: 10.0.10.1
+        bridge: true
+        dhcp: false
+        address: 10.0.10.3/24
+        gateway: 10.0.10.1
+        mtu: 1500
     dns:
-     nameservers:
+      nameservers:
       - 10.0.10.1
-
-#ssh_authorized_keys:
-#  - ssh-rsa
+write_files:
+  - path: /etc/rc.local
+    permissions: "0755"
+    owner: root
+    content: |
+      #!/bin/bash
+      apt-get -y update
+      apt-get -y install python
